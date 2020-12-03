@@ -8,7 +8,7 @@ const FlightsPerMonth = () => {
             <div className="flagCenter">
                 <h1 className="country">Argentina (PAGE 1)</h1>
                 <div className="otherLinks">
-                    <Link to="/">Home</Link>
+                    <Link to="/">Homeeee</Link>
                 </div>
             </div>
             <div className="flagBottom" />
