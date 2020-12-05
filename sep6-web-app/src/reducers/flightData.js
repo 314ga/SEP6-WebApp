@@ -23,7 +23,7 @@ export default function flightDataReducer (state = [], action) {
 export function retrieveFlightData(type)
 {
     return async function fetchFlightData(dispatch, getState){
-        const data = await api.get(type)
+        const data = await api.get("flights?requestBody="+type)
         .then(({data}) => data)
         .catch((err) =>{
             if(err.response)

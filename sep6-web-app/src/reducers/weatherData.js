@@ -23,7 +23,7 @@ export default function weatherDataReducer (state = [], action) {
 export function retrieveWeatherData(type)
 {
     return async function fetchWeatherData(dispatch, getState){
-        const data = await api.get(type)
+        const data = await api.get("weather?requestBody="+type)
         .then(({data}) => data)
         .catch((err) =>{
             if(err.response)

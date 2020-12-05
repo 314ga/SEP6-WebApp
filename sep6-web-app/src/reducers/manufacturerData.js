@@ -23,7 +23,7 @@ export default function manufacturerDataReducer (state = [], action) {
 export function retrieveManufacturerData(type)
 {
     return async function fetchManufacturerData(dispatch, getState){
-        const data = await api.get(type)
+        const data = await api.get("flights?requestBody="+type)
         .then(({data}) => data)
         .catch((err) =>{
             if(err.response)
