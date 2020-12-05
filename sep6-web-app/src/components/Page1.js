@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AppNavbar from '../components/AppNavbar'
 
-const Weather = () => {
+const Page = () => {
     return (
 
         <div>
             <AppNavbar />
-            <p>Weather page</p>
+            <p>Origin page</p>
         </div>
     );
 };
 
-export default Weather;
+export default Page;

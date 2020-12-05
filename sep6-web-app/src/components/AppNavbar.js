@@ -21,7 +21,7 @@ const AppNavbar = () => {
                     <Nav.Link href="/FlightsPerMonth">Flights</Nav.Link>
                     <Nav.Link href="/Weather">Weather</Nav.Link>
                     <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Origin1</NavDropdown.Item>
+                        <NavDropdown.Item href="/Page1">Oring1</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Origin2</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">SOrign3</NavDropdown.Item>
                         <NavDropdown.Divider />
