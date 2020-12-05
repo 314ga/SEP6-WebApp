@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './store'
+import { Provider } from 'react-redux'
+import { retrieveFlightData } from './reducers/flightData'
+import { retrieveWeatherData } from './reducers/weatherData'
+import { retrieveManufacturerData } from './reducers/manufacturerData'
 
+/**
+ * Getting default data from the server 
+ */
+/*TODO: Initial load
+store.dispatch(retrieveFlightData("flight/init"));
+store.dispatch(retrieveWeatherData("weather/init"));
+store.dispatch(retrieveManufacturerData("flight/init-man"));*/
 ReactDOM.render(
+  <Provider store = {store}>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
