@@ -1,15 +1,15 @@
-import {setFlightData} from '../actions';
-import {api} from '../utils/RestAPI'
+import { setFlightData } from '../actions';
+import { api } from '../utils/RestAPI'
 
-export default function flightDataReducer (state = [], action) {
-    switch(action.type){
+export default function flightDataReducer(state = [], action) {
+    switch (action.type) {
         case 'SETFLIGHTDATA':
             return action.payload;
         case 'RESETFLIGHTDATA':
             return state = [];
         default:
             return state;
-    } 
+    }
 }
 
 //retrieve data with REST API and set it to the store - described more in weatherData
@@ -20,35 +20,31 @@ export default function flightDataReducer (state = [], action) {
  * @param {*} startDate filter start date
  * @param {*} endDate filter end date
  */
-export function retrieveFlightData(type)
-{
-    return async function fetchFlightData(dispatch, getState){
-        const data = await api.get("flights?requestBody="+type)
-        .then(({data}) => data)
-        .catch((err) =>{
-            if(err.response)
-            {
-                console.log(err.response.data);
-                console.log(err.response.status);
-                console.log(err.response.headers);
-                console.log(err.config);
-            }
-            else if (err.request) 
-            { 
-                console.log(err.request);
-                console.log(err.config);
-            } 
-            else 
-            { 
-                console.log('Error', err.message);
-                console.log(err.config);
-            }
-        });
+export function retrieveFlightData(type) {
+    return async function fetchFlightData(dispatch, getState) {
+        const data = await api.get("flights?requestBody=" + type)
+            .then(({ data }) => data)
+            .catch((err) => {
+                if (err.response) {
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                    console.log(err.config);
+                }
+                else if (err.request) {
+                    console.log(err.request);
+                    console.log(err.config);
+                }
+                else {
+                    console.log('Error', err.message);
+                    console.log(err.config);
+                }
+            });
 
-    if(data != undefined)
-    {
-        dispatch(setFlightData(data));
-    }
-    
+        if (data != undefined) {
+
+            dispatch(setFlightData(data));
+        }
+
     }
 }

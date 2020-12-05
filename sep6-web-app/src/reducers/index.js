@@ -1,7 +1,7 @@
-import weatherDataReducer from './flightData';
+import weatherDataReducer from './weatherData';
 import flightDataReducer from './flightData';
 import manufacturerDataReducer from './manufacturerData';
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 /**
  * this class is merging all reducers into one reducer

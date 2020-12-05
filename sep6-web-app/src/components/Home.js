@@ -1,26 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+
 
 //bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 import AppNavbar from './AppNavbar'
-import axios from 'axios';
+import { Bar, Line, Pie } from 'react-chartjs-2'
+import store from '../store';
+import { retrieveFlightData } from '../reducers/flightData';
+import { useSelector } from 'react-redux';
+import { Doughnut } from 'react-chartjs-2';
+
 
 
 const Home = () => {
-    axios.post(`https://flightfunctionplan.azurewebsites.net/api/FlightsAPI?code=yDn2pitXFmcoD4q6Lg5j6dYp3I3U6KO2iOGtTbv6koOqYiiangAWHA==`)
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-
+    const [chartData, setCharData] = useState({});
+    const [retrievedData, setRetrievedData] = useState([]);
+    //data reducers
+    const flightData = useSelector(state => state.flightData);
+    const onBtnChangeHandler = () => {
+        store.dispatch(retrieveFlightData("flights-per-month"));
+    }
 
 
     return (
 
         <div>
             <AppNavbar />
-            <p>Home page</p>
+            <Button onClick={() => onBtnChangeHandler()}>Weather per month</Button>
+            {flightData.map(flightData => <div>{flightData.month_flights_origins}</div>)}
         </div>
 
     );

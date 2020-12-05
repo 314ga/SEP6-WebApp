@@ -13,14 +13,14 @@ import { retrieveManufacturerData } from './reducers/manufacturerData'
  * Getting default data from the server 
  */
 /*TODO: Initial load
-store.dispatch(retrieveFlightData("flight/init"));
+store.dispatch(retrieveFlightData("flights-per-month"));
 store.dispatch(retrieveWeatherData("weather/init"));
 store.dispatch(retrieveManufacturerData("flight/init-man"));*/
 ReactDOM.render(
-  <Provider store = {store}>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </Provider>,
   document.getElementById('root')
 );
