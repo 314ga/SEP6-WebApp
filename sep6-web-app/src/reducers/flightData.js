@@ -42,7 +42,6 @@ export function retrieveFlightData(type) {
             });
 
         if (data != undefined) {
-
             dispatch(setFlightData(data));
         }
 
