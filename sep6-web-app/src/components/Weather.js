@@ -37,21 +37,41 @@ const useStyles = makeStyles((theme) => ({
 
 const Weather = () => 
 {
-    const columns = [
+  const renderSwitch = param => 
+  {
+    switch(param) {
+      case 'wo-origins':
+        return <MUIDataTable
+        title={"Weather observation for origins"}
+        data={weatherData}
+        columns={weatherObsCol}
+        options={options}
+        />
+
+      case 'temp-attributes':
+        return 'temp-attributes';
+      case 'temp-jfk':
+        return 'temp-jfk';
+      case 'avgtemp-jfk':
+        return 'avgtemp-jfk';
+      case 'avgtemp-origin':
+        return 'avgtemp-origin';
+      default:
+        return <MUIDataTable
+        title={"Weather observation for origins"}
+        data={weatherData}
+        columns={weatherObsCol}
+        options={options}
+        />;
+    }
+  };
+    const weatherObsCol = [
         {
          name: "origin",
          label: "Origin",
          options: {
           filter: true,
           sort: true,
-         }
-        },
-        {
-         name: "temp",
-         label: "Temperature",
-         options: {
-          filter: true,
-          sort: false,
          }
         },
         {
@@ -63,25 +83,22 @@ const Weather = () =>
          }
         },
        ];
-       
-     
-       
        const options = {
          filterType: 'checkbox',
        };
        //weatherData.map(weatherData => <div>{weatherData.key}</div>)
        const weatherData = useSelector(state =>  state.weatherData);
-       const data = weatherData;
        /* TOOGLE**/
-       const [alignment, setAlignment] = React.useState('left');
+       const [selectedBtn, setSelectedBtn] = React.useState('wo-origins');
 
         const handleDataChange = (event, dataChange) => 
         {
             store.dispatch(retrieveWeatherData(dataChange));
+            setSelectedBtn(dataChange);
         };
 
         const classes = useStyles();
-      
+
     return (
 
         <div>
@@ -91,12 +108,11 @@ const Weather = () =>
             <Paper elevation={0} className={classes.paper}>
         <StyledToggleButtonGroup
           size="small"
-          value={alignment}
           exclusive
           onChange={handleDataChange}
           aria-label="text alignment"
         >
-          <ToggleButton value="wo-origins" aria-label="left aligned">
+          <ToggleButton value="wo-origins" aria-label="left aligned" selected>
             Weather observation for origin
           </ToggleButton>
           <ToggleButton value="temp-attributes" aria-label="centered">
@@ -114,13 +130,7 @@ const Weather = () =>
         </StyledToggleButtonGroup>
       </Paper>
 
-
-            <MUIDataTable
-            title={"Employee List"}
-            data={data}
-            columns={columns}
-            options={options}
-            />
+      {renderSwitch(selectedBtn)}
         </div>
     );
 };
