@@ -8,6 +8,8 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import store from '../store';
 import {useSelector} from 'react-redux'
 import { retrieveWeatherData } from '../reducers/weatherData';
+import { Bar, Bubble, Line, Pie } from 'react-chartjs-2'
+import watch from 'redux-watch'
 const useStyles = makeStyles((theme) => ({
     paper: {
       display: 'flex',
@@ -37,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Weather = () => 
 {
+  const [bubbleDataJFK, setbubbleData] = React.useState([]);
   const renderSwitch = param => 
   {
     switch(param) {
@@ -49,7 +52,28 @@ const Weather = () =>
         />
 
       case 'temp-attributes':
-        return 'temp-attributes';
+        return  <Bubble
+        data = {popData}
+        label= {'Mean Daily temperature for origin'}
+        width={600}
+        height={400}
+        options={{
+          responsive: true,
+            scales: {
+              xAxes: [{
+                  type: 'time',
+                  time: {
+                      unit: 'month',
+                      format: timeFormat,
+                      tooltipFormat: timeFormat,
+                      displayFormats: {
+                        quarter: 'MMM YYYY'
+                    }
+                  },
+              }]
+          },
+        }}
+    />;
       case 'temp-jfk':
         return 'temp-jfk';
       case 'avgtemp-jfk':
@@ -65,40 +89,78 @@ const Weather = () =>
         />;
     }
   };
-    const weatherObsCol = [
-        {
-         name: "origin",
-         label: "Origin",
-         options: {
-          filter: true,
-          sort: true,
-         }
-        },
-        {
-         name: "weather_obs_origin",
-         label: "Observations for origin",
-         options: {
-          filter: true,
-          sort: false,
-         }
-        },
-       ];
-       const options = {
-         filterType: 'checkbox',
-       };
-       //weatherData.map(weatherData => <div>{weatherData.key}</div>)
-       const weatherData = useSelector(state =>  state.weatherData);
-       /* TOOGLE**/
-       const [selectedBtn, setSelectedBtn] = React.useState('wo-origins');
+  const weatherObsCol = [
+      {
+        name: "origin",
+        label: "Origin",
+        options: {
+        filter: true,
+        sort: true,
+        }
+      },
+      {
+        name: "weather_obs_origin",
+        label: "Observations for origin",
+        options: {
+        filter: true,
+        sort: false,
+        }
+      },
+  ];
+  const options = {
+    filterType: 'checkbox',
+  };
+  //weatherData.map(weatherData => <div>{weatherData.key}</div>)
+  const weatherData = useSelector(state =>  state.weatherData);
+  /* TOOGLE**/
+  const [selectedBtn, setSelectedBtn] = React.useState('wo-origins');
 
-        const handleDataChange = (event, dataChange) => 
-        {
-            store.dispatch(retrieveWeatherData(dataChange));
-            setSelectedBtn(dataChange);
-        };
+  const handleDataChange = (event, dataChange) => 
+  {
+      console.log("btn");
+      store.dispatch(retrieveWeatherData(dataChange));
+      setSelectedBtn(dataChange);
+  };
+  var timeFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+  const classes = useStyles();
 
-        const classes = useStyles();
+  /** GRAPHS */
+  var popData = {
+    datasets: [{
+      label: ['JFK temperatures'],
+      data: weatherData.JFK,
+      backgroundColor: "#52FF9966",
+      borderColor: "#FF9966"
+    },
+    {
+      label: ['EWR temperatures'],
+      data: weatherData.EWR,
+      backgroundColor: "#520083c9",
+      borderColor: "#0083c9"
+    },
+    {
+      label: ['LBA temperatures'],
+      data: weatherData.LGA,
+      backgroundColor: "#5200c928",
+      borderColor: "#00c928"
+    },]
+  };
+  /*let w = watch(store.getState, 'weatherData')
+  store.subscribe(w((newVal, oldVal, objectPath) => {
+    console.log("data new arrived");
+  destData(newVal);
+  // admin.name changed from JP to JOE
+  }))
 
+  const destData = (newVal) => {
+
+  //var tempObj = JSON.parse(newVal);
+  console.log(newVal.JFK);
+  /**NEEDS TO BE JSON 
+  setbubbleData(newVal.JFK);
+}*/
+
+  
     return (
 
         <div>
@@ -116,16 +178,10 @@ const Weather = () =>
             Weather observation for origin
           </ToggleButton>
           <ToggleButton value="temp-attributes" aria-label="centered">
-            Origin temperatures
-          </ToggleButton>
-          <ToggleButton value="temp-jfk" aria-label="right aligned">
-            JFK temperature
+            Temperatures
           </ToggleButton>
           <ToggleButton value="avgtemp-jfk" aria-label="justified">
-            Mean temperature JFK
-          </ToggleButton>
-          <ToggleButton value="avgtemp-origin" aria-label="justified">
-            Mean temperature origins
+            Mean temperatures
           </ToggleButton>
         </StyledToggleButtonGroup>
       </Paper>
