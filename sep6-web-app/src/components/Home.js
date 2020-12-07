@@ -11,82 +11,111 @@ import { retrieveFlightData } from '../reducers/flightData';
 import { useSelector } from 'react-redux';
 import watch from 'redux-watch'
 
+//material imports
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
+//material UI tabs panel functions
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`scrollable-auto-tabpanel-${index}`}
+            aria-labelledby={`scrollable-auto-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box p={3}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+};
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        width: '100%',
+        backgroundColor: theme.palette.background.paper,
+    },
+}));
 
 
 const Home = () => {
-    const [destinations, setDestinations] = useState([1000, 800, 1500, 59, 80, 81, 56, 55, 40, 700], [1000, 800, 1500, 59, 80, 81, 56, 55, 40, 700]);
-    const [retrievedData, setRetrievedData] = useState([]);
-    let dest = [];
-    let d_freq = [];
-
+    const [isLoading, setLoading] = useState(true);
+    //tab state
+    const [tabValue, setTabValue] = useState(0);
     //data reducers
     const flightData = useSelector(state => state.flightData);
-    const onBtnChangeHandler = () => {
-        store.dispatch(retrieveFlightData("top-dest"));
+    const classes = useStyles();
+    //handle what happens on each tab click
+    const handleTabChange = (event, newValue) => {
+        console.log("tab value " + newValue);
+        switch (newValue) {
+            case 0: store.dispatch(retrieveFlightData("top-dest"));
+                break;
+            case 1: store.dispatch(retrieveFlightData("flights-per-month"));
+                break;
+            case 2: store.dispatch(retrieveFlightData("avg-airtime"));
+                break;
+            case 3: store.dispatch(retrieveFlightData("planes-per-manufacturer"));
+                break;
+            case 4: store.dispatch(retrieveFlightData("flights-per-manufacturer"));
+                break;
+            case 5: store.dispatch(retrieveFlightData("airbus-per-manufacturer"));
+                break;
+            case 6: store.dispatch(retrieveFlightData("arival-delay"));
+                break;
+            default:
+                break;
+        }
+        setTabValue(newValue);
+        // store.dispatch(retrieveFlightData(newValue));
+    };
 
-    }
-    let w = watch(store.getState, 'flightData')
-    store.subscribe(w((newVal, oldVal, objectPath) => {
-        destData();
-        // admin.name changed from JP to JOE
-    }))
-    const destData = () => {
-        let xaxis = [];
-        let indexer = 0;
-        flightData.map(flightData => {
-            if (flightData.origin.localeCompare('JFK')) {
-                xaxis[indexer] = flightData.result_table_dest;
-                indexer++;
-
-            }
-        })
-
-
-        console.log(xaxis);
-        setRetrievedData(xaxis);
-    }
 
 
 
-    const data = {
-        labels: retrievedData,
+
+
+
+    const topDest = {
+        labels: ["lsdkf", "ksf", "sldkfj", "dfkslfk"],
         datasets: [
             {
-                label: 'Number Of Flight Per Destination',
-                backgroundColor: 'rgba(255,99,132,0.2)',
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
+                label: 'EWR',
+                backgroundColor: 'rgba(153, 102, 255, 1)',
+                data: [3, 4, 20, 34, 343, 23, 34, 45]
+            },
+            {
+                label: 'JFK',
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                data: [34, 72, 4, 456, 67, 34, 32, 34]
+            },
+            {
+                label: 'LGA',
+                backgroundColor: 'rgba(54, 162, 235, 1)',
+                data: [24, 7, 66, 323, 56, 23, 56, 76]
+            },
 
-                ],
-                borderWidth: 1,
-                options: [{ maintainAspectRatio: false }],
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: destinations,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                ],
-            }
         ],
+        borderWidth: 1,
         options: {
+            maintainAspectRatio: true,
+            responsive: true,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -97,23 +126,70 @@ const Home = () => {
         }
 
     };
-
+    function showLoading() {
+        if (isLoading) {
+            return <p>Loading Data...</p>
+        }
+        return <p>LOADED</p>
+    }
     return (
         <div>
             <AppNavbar />
-            <Button onClick={() => onBtnChangeHandler()}>Weather per month</Button>
-            {flightData.map(flightData => <div>{flightData.dest}</div>)}
-            <div>
-                <h2>Bar Example (custom size)</h2>
-                <Bar
-                    data={data}
-                    width={600}
-                    height={400}
-                    options={{
-                        maintainAspectRatio: false
-                    }}
-                />
+            <div className={classes.root}>
+                <AppBar position="static" color="default">
+                    <Tabs
+                        value={tabValue}
+                        onChange={handleTabChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        variant="scrollable"
+                        scrollButtons="auto"
+                        aria-label="scrollable auto tabs example"
+
+                    >
+                        <Tab label="Top 10 destinations" />
+                        <Tab label="Flights Per Month" />
+                        <Tab label="Average airtime" />
+                        <Tab label="Flights Per Manufacturer" />
+                        <Tab label="Planes Per Manufacturer" />
+                        <Tab label="Airbus Per Manufacturer" />
+                        <Tab label="Arrival delay" />
+                    </Tabs>
+                </AppBar>
+                <TabPanel value={tabValue} index={0}>
+                    <div>
+                        <h2>Top 10 Destinations</h2>
+                        <Bar
+                            data={topDest}
+                            width={300}
+                            height={200}
+                            options={{
+                                maintainAspectRatio: false
+                            }}
+                        />
+                    </div>
+                </TabPanel>
+                <TabPanel value={tabValue} index={1}>
+                    Flights Per Month
+            </TabPanel>
+                <TabPanel value={tabValue} index={2}>
+                    Average kdfjdks
+            </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                    Planes Per man
+            </TabPanel>
+                <TabPanel value={tabValue} index={4}>
+                    Airbus per manu
+            </TabPanel>
+                <TabPanel value={tabValue} index={5}>
+                    Flights per manu
+            </TabPanel>
+                <TabPanel value={tabValue} index={6}>
+                    Arival
+            </TabPanel>
             </div>
+
+            {showLoading()}
 
         </div>
 
