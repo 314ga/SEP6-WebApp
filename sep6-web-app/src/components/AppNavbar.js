@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
 //bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +16,7 @@ const AppNavbar = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/FlightsPerMonth">Flights</Nav.Link>
+                    <Nav.Link href="/FlightsPage">Flights</Nav.Link>
                     <Nav.Link href="/Weather">Weather</Nav.Link>
                     <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Page1">Oring1</NavDropdown.Item>

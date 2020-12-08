@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import AppNavbar from '../components/AppNavbar'
+
 
 const Page = () => {
     return (
@@ -8,6 +8,7 @@ const Page = () => {
         <div>
             <AppNavbar />
             <p>Origin page</p>
+
         </div>
     );
 };

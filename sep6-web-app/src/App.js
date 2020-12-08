@@ -1,6 +1,6 @@
 
 import './App.css';
-import FlightsPerMonth from './components/FlightsPerMonth';
+import FlightsPage from './components/FlightsPage';
 import Home from './components/Home';
 import Weather from './components/Weather';
 import Page1 from './components/Page1';
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/FlightsPerMonth" component={FlightsPerMonth} />
+        <Route exact path="/FlightsPage" component={FlightsPage} />
         <Route exact path="/Weather" component={Weather} />
         <Route exact path="/Page1" component={Page1} />
 
