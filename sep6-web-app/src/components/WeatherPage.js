@@ -23,10 +23,10 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
     },
   },
 }))(ToggleButtonGroup);
-retrieveData('weather', 'temp-attributes');
-retrieveData('weather', 'wo-origins');
-retrieveData('weather', 'dewp-attributes');
-retrieveData('weather', 'avgtemp-origin');
+// retrieveData('weather', 'temp-attributes');
+// retrieveData('weather', 'wo-origins');
+// retrieveData('weather', 'dewp-attributes');
+// retrieveData('weather', 'avgtemp-origin');
 const Weather = () => {
 
   const useStyles = makeStyles((theme) => ({

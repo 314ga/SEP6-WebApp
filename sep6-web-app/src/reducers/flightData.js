@@ -1,4 +1,4 @@
-import { setDestinationData, setFlightsPerMonthData, setAvgAirtime, setArrivalDelay } from '../actions';
+import { setDestinationData, setDestinationTableData, setFlightsPerMonthData, setAvgAirtime, setArrivalDelay } from '../actions';
 import { api } from '../utils/RestAPI'
 
 
@@ -36,6 +36,10 @@ export function retrieveFlightData(type) {
             switch (type) {
                 case "top-dest":
                     dispatch(setDestinationData(data));
+                    console.log("sdifljldf" + data);
+                    break;
+                case "top-dest-table":
+                    dispatch(setDestinationTableData(data));
                     break;
                 case "flights-per-month":
                     dispatch(setFlightsPerMonthData(data));

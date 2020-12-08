@@ -21,6 +21,14 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+
+import { retrieveData } from '../utils/StoreHandler';
+retrieveData('flights', 'top-dest');
+retrieveData('flights', 'top-dest-table');
+// retrieveData('flights', "avg-airtime");
+// retrieveData('flights', "flights-per-month");
+// retrieveData('flights', "arival-delay");
+
 //material UI tabs panel functions
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -60,19 +68,19 @@ const FlightsPage = () => {
     const classes = useStyles();
     //when each tab is clicked on, dispatch the responsible store and opdate the tabvalue
     const handleTabChange = (event, newValue) => {
-        console.log("tab value " + newValue);
-        switch (newValue) {
-            case 0: store.dispatch(retrieveFlightData("top-dest"));
-                break;
-            case 1: store.dispatch(retrieveFlightData("flights-per-month"));
-                break;
-            case 2: store.dispatch(retrieveFlightData("avg-airtime"));
-                break;
-            case 3: store.dispatch(retrieveFlightData("arival-delay"));
-                break;
-            default:
-                break;
-        }
+        // switch (newValue) {
+        //     case 0: store.dispatch(retrieveFlightData("top-dest"));
+        //             store.dispatch(retrieveFlightData("top-dest-table"));
+        //         break;
+        //     case 1: store.dispatch(retrieveFlightData("flights-per-month"));
+        //         break;
+        //     case 2: store.dispatch(retrieveFlightData("avg-airtime"));
+        //         break;
+        //     case 3: store.dispatch(retrieveFlightData("arival-delay"));
+        //         break;
+        //     default:
+        //         break;
+        // }
         setTabValue(newValue);
         // store.dispatch(retrieveFlightData(newValue));
     };
@@ -95,7 +103,6 @@ const FlightsPage = () => {
                         <Tab label="Top 10 destinations" />
                         <Tab label="Flights Per Month" />
                         <Tab label="Average airtime" />
-
                         <Tab label="Arrival delay" />
                     </Tabs>
                 </AppBar>

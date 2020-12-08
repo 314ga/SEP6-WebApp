@@ -60,7 +60,6 @@ const ManufacturerPage = () => {
     const classes = useStyles();
     //when each tab is clicked on, dispatch the responsible store and opdate the tabvalue
     const handleTabChange = (event, newValue) => {
-        console.log("tab value " + newValue);
         switch (newValue) {
             case 0: store.dispatch(retrieveFlightData("planes-per-manufacturer"));
                 break;

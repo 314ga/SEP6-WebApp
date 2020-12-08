@@ -4,6 +4,7 @@ import dewpTempReducer from './dewpTempReducer';
 import observationsReducer from './observationsReducer';
 //flight data reducers
 import topDestReducer from './topDestReducer';
+import topDestTableReducer from './topDestTableReducer';
 import flightsPerMonthReducer from './flightsPerMonthReducer';
 import avgAirtimeReducer from './avgAirtimeReducer';
 import arrivalDelayReducer from './arrivalDelayReducer';
@@ -25,6 +26,7 @@ const allReducers = combineReducers({
     observData: observationsReducer,
     tempAvgData: tempAvgReducer,
     topDestData: topDestReducer,
+    topDestTableData: topDestTableReducer,
     flightsPerMonthData: flightsPerMonthReducer,
     avgAirtimeData: avgAirtimeReducer,
     arrivalDelayData: arrivalDelayReducer,

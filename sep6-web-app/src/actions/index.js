@@ -32,6 +32,12 @@ export const setDestinationData = (data) => {
         payload: data
     };
 };
+export const setDestinationTableData = (data) => {
+    return {
+        type: 'SETDESTINATIONSTABLE',
+        payload: data
+    };
+};
 export const setFlightsPerMonthData = (data) => {
     return {
         type: 'SETFLIGHTSPERMONTH',
