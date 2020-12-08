@@ -3,14 +3,10 @@ import { useSelector } from 'react-redux';
 import store from '../store';
 import { retrieveFlightData } from '../reducers/flightData';
 
-//chart component imports
-import TopDestinationChart from "./charts/TopDestinationsChart";
-import FlightsPerMonthFrequency from "./charts/FlightsPerMonthFrequency";
-import FlightsPerMonthStacked from './charts/FlightsPerMonthStacked'
-import FlightsPerMonthPercentage from './charts/FlightsPerMonthPercentage'
-import FlightsPerMonthSplit from './charts/FlightsPerMonthSplit'
 //table component import
-import TopDestinationsTable from "./tables/TopDestinationsTable";
+import PlanesPerManufacturer from "./tables/PlanesPerManufacturer";
+import FlightsManufacturer from "./tables/FlightsPerManufacturer";
+import AirbusPerManufacturer from "./tables/AirbusPerManufacturer";
 
 import AppNavbar from '../components/AppNavbar'
 import PropTypes from 'prop-types';
@@ -21,6 +17,10 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+import { retrieveData } from '../utils/StoreHandler';
+retrieveData('manufacturer', 'planes-per-manufacturer');
+retrieveData('manufacturer', 'airbus-per-manufaturer');
+retrieveData('manufacturer', 'flights-per-manufacturer');
 //material UI tabs panel functions
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -60,16 +60,16 @@ const ManufacturerPage = () => {
     const classes = useStyles();
     //when each tab is clicked on, dispatch the responsible store and opdate the tabvalue
     const handleTabChange = (event, newValue) => {
-        switch (newValue) {
-            case 0: store.dispatch(retrieveFlightData("planes-per-manufacturer"));
-                break;
-            case 1: store.dispatch(retrieveFlightData("flights-per-manufacturer"));
-                break;
-            case 2: store.dispatch(retrieveFlightData("airbus-per-manufacturer"));
-                break;
-            default:
-                break;
-        }
+        // switch (newValue) {
+        //     case 0: store.dispatch(retrieveFlightData("planes-per-manufacturer"));
+        //         break;
+        //     case 1: store.dispatch(retrieveFlightData("flights-per-manufacturer"));
+        //         break;
+        //     case 2: store.dispatch(retrieveFlightData("airbus-per-manufacturer"));
+        //         break;
+        //     default:
+        //         break;
+        // }
         setTabValue(newValue);
         // store.dispatch(retrieveFlightData(newValue));
     };
@@ -77,8 +77,6 @@ const ManufacturerPage = () => {
 
         <div>
             <AppNavbar />
-            <p>Flights Page</p>
-
             <div className={classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs
@@ -91,24 +89,28 @@ const ManufacturerPage = () => {
                         aria-label="scrollable auto tabs example"
 
                     >
-                        <Tab label="Flights Per Manufacturer" />
                         <Tab label="Planes Per Manufacturer" />
+                        <Tab label="Flights Per Manufacturer" />
                         <Tab label="Airbus Per Manufacturer" />
 
                     </Tabs>
                 </AppBar>
                 <TabPanel value={tabValue} index={0}>
                     <Box p={3}>
-                        Planes Per man
+                        <PlanesPerManufacturer />
                     </Box>
                 </TabPanel>
 
                 <TabPanel value={tabValue} index={1}>
-                    Airbus per manu
-            </TabPanel>
+                    <Box p={3}>
+                        <FlightsManufacturer />
+                    </Box>
+                </TabPanel>
                 <TabPanel value={tabValue} index={2}>
-                    Flights per manu
-            </TabPanel>
+                    <Box p={3}>
+                        <AirbusPerManufacturer />
+                    </Box>
+                </TabPanel>
 
             </div>
         </div>

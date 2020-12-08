@@ -28,10 +28,10 @@ import Box from '@material-ui/core/Box';
 import { retrieveData } from '../utils/StoreHandler';
 // retrieveData('flights', 'top-dest');
 // retrieveData('flights', 'top-dest-table');
-retrieveData('flights', "avg-airtime");
-retrieveData('flights', "flights-per-month");
-retrieveData('flights', "flights-per-month-stacked");
-retrieveData('flights', "delays");
+// retrieveData('flights', "avg-airtime");
+// retrieveData('flights', "flights-per-month");
+// retrieveData('flights', "flights-per-month-stacked");
+// retrieveData('flights', "delays");
 
 //material UI tabs panel functions
 function TabPanel(props) {
@@ -112,8 +112,12 @@ const FlightsPage = () => {
                 </AppBar>
                 {/* TOP 10 DESTINATIONS */}
                 <TabPanel value={tabValue} index={0}>
-                    <TopDestinationChart />
-                    <TopDestinationsTable />
+                    <Box p={3}>
+                        <TopDestinationChart />
+                    </Box>
+                    <Box p={3}>
+                        <TopDestinationsTable />
+                    </Box>
                 </TabPanel>
                 {/* FLIGHTS PER MONTH */}
                 <TabPanel value={tabValue} index={1}>

@@ -41,7 +41,7 @@ export function retrieveManufacturerData(type) {
                     dispatch(setPlanesPerManufact(data));
                     break;
 
-                case "airbus-per-manufacturer":
+                case "airbus-per-manufaturer":
                     dispatch(setairbusPerManufact(data));
                     break;
                 default: console.log("case NOT FOUND");

@@ -12,7 +12,7 @@ export const retrieveData = (storeType, type) => {
             store.dispatch(retrieveWeatherData(type));
             break;
         case 'manufacturer':
-            // store.dispatch(retrieveManufacturerData(type));
+            store.dispatch(retrieveManufacturerData(type));
             break;
         case 'flights':
             store.dispatch(retrieveFlightData(type));
