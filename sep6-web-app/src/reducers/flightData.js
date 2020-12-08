@@ -36,7 +36,6 @@ export function retrieveFlightData(type) {
             switch (type) {
                 case "top-dest":
                     dispatch(setDestinationData(data));
-                    console.log("sdifljldf" + data);
                     break;
                 case "top-dest-table":
                     dispatch(setDestinationTableData(data));
@@ -44,7 +43,6 @@ export function retrieveFlightData(type) {
                 case "flights-per-month":
                     dispatch(setFlightsPerMonthData(data));
                     break;
-
                 case "avg-airtime":
                     dispatch(setAvgAirtime(data));
                     break;

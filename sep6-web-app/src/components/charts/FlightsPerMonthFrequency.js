@@ -1,20 +1,22 @@
-import { Bar, Line, Pie } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
+import React from "react";
+import { useSelector } from 'react-redux';
 
 
-const flightsPerMonth = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45]
-    }],
-
-}
 const FlightsPerMonthFrequency = () => {
+    const flightData = useSelector(state => state.flightsPerMonthData);
+    const flightsPerMonth = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: flightData.flights,
+        }],
+    }
     return (
         <div>
-            <h2>Flights Per Flights Per Month Frequency For JFK, EWR, SSS</h2>
+            <h2>Number Of Flights Per Month</h2>
             <Bar
                 data={flightsPerMonth}
                 options={{

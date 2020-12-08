@@ -31,14 +31,7 @@ const TopDestinationChart = () => {
 
 
     };
-    let origins = [];
 
-    console.log(destinationData.origin);
-    const onBtnClick = () => {
-        console.log(destinationData);
-        console.log(destinationData.origin);
-        origins.push(destinationData.origin);
-    }
     return (
         <div>
             <h2>Top 10 Destinations</h2>
