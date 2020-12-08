@@ -330,24 +330,7 @@ const Home = () => {
                 </AppBar>
                 {/* TOP 10 DESTINATIONS */}
                 <TabPanel value={tabValue} index={0}>
-                    <div>
-                        <h2>Top 10 Destinations</h2>
-                        <Bar
-                            data={topDest}
-                            options={{
-                                aspectRatio: 1,
-                                borderWidth: 1,
-                                responsive: true,
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }}
-                        />
-                    </div>
+
                     <div>
                         <h2>Top 10 Destinations Table</h2>
                         <TableContainer component={Paper}>
@@ -382,19 +365,7 @@ const Home = () => {
                 <TabPanel value={tabValue} index={1}>
                     <div>
                         <h2>Flights Per Month</h2>
-                        <Bar
-                            data={flightsPerMonth}
-                            options={{
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }}
 
-                        />
                     </div>
                     <div>
                         <h2>Flights Per Month Split</h2>
