@@ -6,7 +6,7 @@ import { retrieveFlightData } from '../reducers/flightData';
 //chart component imports
 import TopDestinationChart from "./charts/TopDestinationsChart";
 import FlightsPerMonthFrequency from "./charts/FlightsPerMonthFrequency";
-
+import FlightsPerMonthStacked from './charts/FlightsPerMonthStacked'
 //table component import
 import TopDestinationsTable from "./tables/TopDestinationsTable";
 
@@ -115,6 +115,7 @@ const FlightsPage = () => {
                 {/* FLIGHTS PER MONTH */}
                 <TabPanel value={tabValue} index={1}>
                     <FlightsPerMonthFrequency />
+                    <FlightsPerMonthStacked />
                     <div>
                         <h2>Flights Per Month Split</h2>
 
