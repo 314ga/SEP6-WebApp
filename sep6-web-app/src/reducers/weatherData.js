@@ -1,16 +1,5 @@
-import {setWeatherData} from '../actions';
+import {setTempData,setDewpTempData,setObservationData, setAvgTempData} from '../actions';
 import {api} from '../utils/RestAPI'
-
-export default function weatherDataReducer (state = [], action) {
-    switch(action.type){
-        case 'SETWEATHERDATA':
-            return action.payload;
-        case 'RESETWEATHERDATA':
-            return state = [];
-        default:
-            return state;
-    } 
-}
 
 //retrieve data with REST API and set it to the store - described more in weatherData
 /**
@@ -47,7 +36,24 @@ export function retrieveWeatherData(type)
 
     if(data != undefined)
     {
-        dispatch(setWeatherData(data));
+        switch(type)
+        {
+            case 'wo-origins':
+                dispatch(setObservationData(data));
+                break;
+              case 'temp-attributes':
+                dispatch(setTempData(data));
+                break;
+              case 'dewp-attributes':
+                dispatch(setDewpTempData(data));
+                break;
+              case 'avgtemp-origin':
+                dispatch(setAvgTempData(data));
+                break;
+              default:
+                break;
+                
+        }
     }
     
     }

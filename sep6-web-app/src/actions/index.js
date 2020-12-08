@@ -6,23 +6,32 @@ export const setFlightData = (data) =>
         payload: data
     };
 };
-export const resetFlightData = () =>
+export const setTempData = (data) =>
 {
     return {
-        type: 'RESETFLIGHTDATA'
-    };
-};
-export const setWeatherData = (data) =>
-{
-    return {
-        type: 'SETWEATHERDATA',
+        type: 'SETTEMPDATA',
         payload: data
     };
 };
-export const resetWeatherData = () =>
+export const setDewpTempData = (data) =>
 {
     return {
-        type: 'RESETWEATHERDATA'
+        type: 'SETDEWPTEMPDATA',
+        payload: data
+    };
+};
+export const setObservationData = (data) =>
+{
+    return {
+        type: 'SETOBSERVATIONDATA',
+        payload: data
+    };
+};
+export const setAvgTempData = (data) =>
+{
+    return {
+        type: 'SETAVGTEMPDATA',
+        payload: data
     };
 };
 export const setManufacturerData = (data) =>
@@ -30,11 +39,5 @@ export const setManufacturerData = (data) =>
     return {
         type: 'SETMANUFACTURERDATA',
         payload: data
-    };
-};
-export const resetManufacturerData = () =>
-{
-    return {
-        type: 'RESETMANUFACTURERDATA'
     };
 };
