@@ -29,6 +29,7 @@ import { retrieveData } from '../utils/StoreHandler';
 // retrieveData('flights', 'top-dest-table');
 // retrieveData('flights', "avg-airtime");
 retrieveData('flights', "flights-per-month");
+retrieveData('flights', "flights-per-month-stacked");
 // retrieveData('flights', "arival-delay");
 
 //material UI tabs panel functions

@@ -1,4 +1,4 @@
-import { setDestinationData, setDestinationTableData, setFlightsPerMonthData, setAvgAirtime, setArrivalDelay } from '../actions';
+import { setDestinationData, setDestinationTableData, setFlightsPerMonthData, setAvgAirtime, setArrivalDelay, setFlightsPMStackedData, setFlightsPMSplitData, setFlightsPMPercentData, } from '../actions';
 import { api } from '../utils/RestAPI'
 
 
@@ -40,9 +40,18 @@ export function retrieveFlightData(type) {
                 case "top-dest-table":
                     dispatch(setDestinationTableData(data));
                     break;
+                case "flights-per-month-stacked":
+                    dispatch(setFlightsPMStackedData(data));
+                    break;
                 case "flights-per-month":
                     dispatch(setFlightsPerMonthData(data));
                     break;
+                // case "flights-per-percentage":
+                //     dispatch(setFlightsPMPercentData(data));
+                //     break;
+                // case "flights-per-month-split":
+                //     dispatch(setFlightsPMSplitData(data));
+                //     break;
                 case "avg-airtime":
                     dispatch(setAvgAirtime(data));
                     break;

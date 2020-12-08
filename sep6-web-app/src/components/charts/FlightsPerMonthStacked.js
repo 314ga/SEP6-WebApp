@@ -3,7 +3,7 @@ import { Bar, Line, Pie } from 'react-chartjs-2'
 
 
 const flightsPerMonthStacked = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'May', 'June', 'July'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     datasets: [
         {
             label: 'EWR',

@@ -44,6 +44,24 @@ export const setFlightsPerMonthData = (data) => {
         payload: data
     };
 };
+export const setFlightsPMStackedData = (data) => {
+    return {
+        type: 'SETFLIGHTPERMONTHSTACKED',
+        payload: data
+    };
+};
+export const setFlightsPMSplitData = (data) => {
+    return {
+        type: 'SETFLIGHTSPPMSPLIT',
+        payload: data
+    };
+};
+export const setFlightsPMPercentData = (data) => {
+    return {
+        type: 'SETFLIGHTSPPMPERCENT',
+        payload: data
+    };
+};
 export const setAvgAirtime = (data) => {
     return {
         type: 'SETAVGAIRTIME',
