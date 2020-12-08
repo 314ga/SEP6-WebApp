@@ -7,6 +7,8 @@ import { retrieveFlightData } from '../reducers/flightData';
 import TopDestinationChart from "./charts/TopDestinationsChart";
 import FlightsPerMonthFrequency from "./charts/FlightsPerMonthFrequency";
 import FlightsPerMonthStacked from './charts/FlightsPerMonthStacked'
+import FlightsPerMonthPercentage from './charts/FlightsPerMonthPercentage'
+import FlightsPerMonthSplit from './charts/FlightsPerMonthSplit'
 //table component import
 import TopDestinationsTable from "./tables/TopDestinationsTable";
 
@@ -116,19 +118,9 @@ const FlightsPage = () => {
                 <TabPanel value={tabValue} index={1}>
                     <FlightsPerMonthFrequency />
                     <FlightsPerMonthStacked />
-                    <div>
-                        <h2>Flights Per Month Split</h2>
+                    <FlightsPerMonthPercentage />
+                    <FlightsPerMonthSplit />
 
-                    </div>
-                    <div>
-                        <h2>Flights Per Month Stacked Percentage</h2>
-
-                    </div>
-                    <div>
-                        <h2>
-                            Flights Per Month Stacked</h2>
-
-                    </div>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
                     Average kdfjdks
