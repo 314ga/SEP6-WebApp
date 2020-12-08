@@ -5,6 +5,10 @@ import { retrieveFlightData } from '../reducers/flightData';
 
 //chart component imports
 import TopDestinationChart from "./charts/TopDestinationsChart";
+
+//table component import
+import TopDestinationsTable from "./tables/TopDestinationsTable";
+
 import AppNavbar from '../components/AppNavbar'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -105,10 +109,7 @@ const FlightsPage = () => {
                 {/* TOP 10 DESTINATIONS */}
                 <TabPanel value={tabValue} index={0}>
                     <TopDestinationChart />
-                    <div>
-                        <h2>Top 10 Destinations Table</h2>
-
-                    </div>
+                    <TopDestinationsTable />
                 </TabPanel>
                 {/* FLIGHTS PER MONTH */}
                 <TabPanel value={tabValue} index={1}>
