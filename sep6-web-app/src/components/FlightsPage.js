@@ -116,10 +116,19 @@ const FlightsPage = () => {
                 </TabPanel>
                 {/* FLIGHTS PER MONTH */}
                 <TabPanel value={tabValue} index={1}>
-                    <FlightsPerMonthFrequency />
-                    <FlightsPerMonthStacked />
-                    <FlightsPerMonthPercentage />
-                    <FlightsPerMonthSplit />
+                    <Box p={3}>
+                        <FlightsPerMonthFrequency />
+                    </Box>
+                    <Box p={3}>
+                        <FlightsPerMonthStacked />
+                    </Box>
+                    <Box p={3}>
+                        <FlightsPerMonthPercentage />
+                    </Box>
+                    <Box p={3}>
+                        <FlightsPerMonthSplit />
+                    </Box>
+
 
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
