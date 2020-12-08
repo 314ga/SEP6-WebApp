@@ -1,16 +1,7 @@
-import { setFlightData } from '../actions';
+import { setDestinationData, setFlightsPerMonthData, setAvgAirtime, setArrivalDelay } from '../actions';
 import { api } from '../utils/RestAPI'
 
-export default function flightDataReducer(state = [], action) {
-    switch (action.type) {
-        case 'SETFLIGHTDATA':
-            return action.payload;
-        case 'RESETFLIGHTDATA':
-            return state = [];
-        default:
-            return state;
-    }
-}
+
 
 //retrieve data with REST API and set it to the store - described more in weatherData
 /**
@@ -42,7 +33,25 @@ export function retrieveFlightData(type) {
             });
 
         if (data != undefined) {
-            dispatch(setFlightData(data));
+            switch (type) {
+                case "top-dest":
+                    dispatch(setDestinationData(data));
+                    break;
+                case "flights-per-month":
+                    dispatch(setFlightsPerMonthData(data));
+                    break;
+
+                case "avg-airtime":
+                    dispatch(setAvgAirtime(data));
+                    break;
+
+                case "arival-delay":
+                    dispatch(setArrivalDelay(data));
+                    break;
+                default:
+                    console.log("CASE NOT FOUND");
+            }
+
         }
 
     }

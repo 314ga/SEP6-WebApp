@@ -15,16 +15,16 @@ const AppNavbar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/FlightsPage">Flights</Nav.Link>
-                    <Nav.Link href="/Weather">Weather</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                    <Nav.Link href="/">Flights</Nav.Link>
+                    <Nav.Link href="/ManufacturerPage">Manufacturer</Nav.Link>
+                    <Nav.Link href="/WeatherPage">Weather</Nav.Link>
+                    {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/Page1">Oring1</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Origin2</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">SOrign3</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
+                    </NavDropdown> */}
                 </Nav>
 
             </Navbar.Collapse>

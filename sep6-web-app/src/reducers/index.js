@@ -2,8 +2,18 @@ import tempReducer from './tempReducer';
 import tempAvgReducer from './tempAvgReducer';
 import dewpTempReducer from './dewpTempReducer';
 import observationsReducer from './observationsReducer';
-import flightDataReducer from './flightData';
-import manufacturerDataReducer from './manufacturerData';
+//flight data reducers
+import topDestReducer from './topDestReducer';
+import flightsPerMonthReducer from './flightsPerMonthReducer';
+import avgAirtimeReducer from './avgAirtimeReducer';
+import arrivalDelayReducer from './arrivalDelayReducer';
+//manufacturer data reducers
+import airbusPerManufacturerReducer from './airbusPerManufacturerReducer';
+import flightsPerManufacturerReducer from './flightsPerManufacturerReducer';
+import planesPerManufacturerReducer from './planesPerManufacturerReducer';
+
+
+
 import { combineReducers } from 'redux';
 
 /**
@@ -14,8 +24,13 @@ const allReducers = combineReducers({
     dewpTempData: dewpTempReducer,
     observData: observationsReducer,
     tempAvgData: tempAvgReducer,
-    flightData: flightDataReducer,
-    manufacturerData: manufacturerDataReducer
+    topDestData: topDestReducer,
+    flightsPerMonthData: flightsPerMonthReducer,
+    avgAirtimeData: avgAirtimeReducer,
+    arrivalDelayData: arrivalDelayReducer,
+    airbusManfactData: airbusPerManufacturerReducer,
+    flightsManufactData: flightsPerManufacturerReducer,
+    planesManufactData: planesPerManufacturerReducer
 });
 
 export default allReducers;

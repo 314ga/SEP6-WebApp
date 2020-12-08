@@ -1,16 +1,7 @@
-import { setManufacturerData } from '../actions';
+import { setPlanesPerManufact, setFlightsPerManufact, setairbusPerManufact } from '../actions';
 import { api } from '../utils/RestAPI'
 
-export default function manufacturerDataReducer(state = [], action) {
-    switch (action.type) {
-        case 'SETMANUFACTURERDATA':
-            return action.payload;
-        case 'RESETMANUFACTURERDATA':
-            return state = [];
-        default:
-            return state;
-    }
-}
+
 
 //retrieve data with REST API and set it to the store - described more in weatherData
 /**
@@ -42,10 +33,22 @@ export function retrieveManufacturerData(type) {
             });
 
         if (data != undefined) {
-            let slicedData = data.slice(0, -1);
-            let parsedJson = JSON.parse(slicedData);
-            console.log(parsedJson);
-            dispatch(setManufacturerData(parsedJson));
+            switch (type) {
+                case "flights-per-manufacturer":
+                    dispatch(setFlightsPerManufact(data));
+                    break;
+                case "planes-per-manufacturer":
+                    dispatch(setPlanesPerManufact(data));
+                    break;
+
+                case "airbus-per-manufacturer":
+                    dispatch(setairbusPerManufact(data));
+                    break;
+                default: console.log("case NOT FOUND");
+
+
+
+            }
         }
 
     }

@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
 }));
-const FlightsPage = () => {
+const ManufacturerPage = () => {
     //tab state
     const [tabValue, setTabValue] = useState(0);
     const classes = useStyles();
@@ -62,13 +62,11 @@ const FlightsPage = () => {
     const handleTabChange = (event, newValue) => {
         console.log("tab value " + newValue);
         switch (newValue) {
-            case 0: store.dispatch(retrieveFlightData("top-dest"));
+            case 0: store.dispatch(retrieveFlightData("planes-per-manufacturer"));
                 break;
-            case 1: store.dispatch(retrieveFlightData("flights-per-month"));
+            case 1: store.dispatch(retrieveFlightData("flights-per-manufacturer"));
                 break;
-            case 2: store.dispatch(retrieveFlightData("avg-airtime"));
-                break;
-            case 3: store.dispatch(retrieveFlightData("arival-delay"));
+            case 2: store.dispatch(retrieveFlightData("airbus-per-manufacturer"));
                 break;
             default:
                 break;
@@ -80,6 +78,8 @@ const FlightsPage = () => {
 
         <div>
             <AppNavbar />
+            <p>Flights Page</p>
+
             <div className={classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs
@@ -92,45 +92,28 @@ const FlightsPage = () => {
                         aria-label="scrollable auto tabs example"
 
                     >
-                        <Tab label="Top 10 destinations" />
-                        <Tab label="Flights Per Month" />
-                        <Tab label="Average airtime" />
+                        <Tab label="Flights Per Manufacturer" />
+                        <Tab label="Planes Per Manufacturer" />
+                        <Tab label="Airbus Per Manufacturer" />
 
-                        <Tab label="Arrival delay" />
                     </Tabs>
                 </AppBar>
-                {/* TOP 10 DESTINATIONS */}
                 <TabPanel value={tabValue} index={0}>
-                    <TopDestinationChart />
-                    <TopDestinationsTable />
+                    <Box p={3}>
+                        Planes Per man
+                    </Box>
                 </TabPanel>
-                {/* FLIGHTS PER MONTH */}
+
                 <TabPanel value={tabValue} index={1}>
-                    <Box p={3}>
-                        <FlightsPerMonthFrequency />
-                    </Box>
-                    <Box p={3}>
-                        <FlightsPerMonthStacked />
-                    </Box>
-                    <Box p={3}>
-                        <FlightsPerMonthPercentage />
-                    </Box>
-                    <Box p={3}>
-                        <FlightsPerMonthSplit />
-                    </Box>
-
-
-                </TabPanel>
-
+                    Airbus per manu
+            </TabPanel>
                 <TabPanel value={tabValue} index={2}>
-                    avg air time
+                    Flights per manu
             </TabPanel>
-                <TabPanel value={tabValue} index={3}>
-                    delay
-            </TabPanel>
+
             </div>
         </div>
     );
 };
 
-export default FlightsPage;
+export default ManufacturerPage;
