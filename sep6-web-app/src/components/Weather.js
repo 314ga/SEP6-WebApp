@@ -1,27 +1,14 @@
 import React from "react";
 import AppNavbar from '../components/AppNavbar'
-import MUIDataTable from "mui-datatables";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import store from '../store';
-import {useSelector} from 'react-redux'
 import { retrieveWeatherData } from '../reducers/weatherData';
-import { Bar, Bubble, Line, Pie } from 'react-chartjs-2'
-import watch from 'redux-watch'
-const useStyles = makeStyles((theme) => ({
-    paper: {
-      display: 'flex',
-      textAlign: 'center',
-      border: `1px solid ${theme.palette.divider}`,
-      flexWrap: 'wrap',
-    },
-    divider: {
-      margin: theme.spacing(1, 0.5),
-    },
-  }));
-  
+import BubbleChartTemps from './charts/BubbleChartTemps'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import TableObservationsPerOrigin from "./tables/TableObservationsPerOrigin";
+
   const StyledToggleButtonGroup = withStyles((theme) => ({
     grouped: {
       margin: theme.spacing(0.5),
@@ -36,63 +23,29 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   }))(ToggleButtonGroup);
-  const weatherObsCol = [
-    {
-      name: "origin",
-      label: "Origin",
-      options: {
-      filter: true,
-      sort: true,
-      }
-    },
-    {
-      name: "weather_obs_origin",
-      label: "Observations for origin",
-      options: {
-      filter: true,
-      sort: false,
-      }
-    },
-];
-const options = {
-  filterType: 'checkbox',
-};
+
 const Weather = () => 
 {
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      display: 'flex',
+      textAlign: 'center',
+      border: `1px solid ${theme.palette.divider}`,
+      flexWrap: 'wrap',
+    },
+    divider: {
+      margin: theme.spacing(1, 0.5),
+    },
+  }));
+  const classes = useStyles();
   const renderSwitch = param => 
   {
     switch(param) {
       case 'wo-origins':
-        return <MUIDataTable
-        title={"Weather observation for origins"}
-        data={weatherData}
-        columns={weatherObsCol}
-        options={options}
-        />
+        return <TableObservationsPerOrigin/>
 
       case 'temp-attributes':
-        return  <Bubble
-        data = {popData}
-        label= {'Mean Daily temperature for origin'}
-        width={600}
-        height={400}
-        options={{
-          responsive: true,
-            scales: {
-              xAxes: [{
-                  type: 'time',
-                  time: {
-                      unit: 'month',
-                      format: timeFormat,
-                      tooltipFormat: timeFormat,
-                      displayFormats: {
-                        quarter: 'MMM YYYY'
-                    }
-                  },
-              }]
-          },
-        }}
-    />;
+        return <BubbleChartTemps/>
       case 'temp-jfk':
         return 'temp-jfk';
       case 'avgtemp-jfk':
@@ -100,32 +53,10 @@ const Weather = () =>
       case 'avgtemp-origin':
         return 'avgtemp-origin';
       default:
-        return <MUIDataTable
-        title={"Weather observation for origins"}
-        data={weatherData}
-        columns={{
-          name: "origin",
-          label: "Origin",
-          options: {
-          filter: true,
-          sort: true,
-          }
-        },
-        {
-          name: "weather_obs_origin",
-          label: "Observations for origin",
-          options: {
-          filter: true,
-          sort: false,
-          }
-        }}
-        options={options}
-        />;
+        return <TableObservationsPerOrigin/>
     }
   };
   
-  //weatherData.map(weatherData => <div>{weatherData.key}</div>)
-  const weatherData = useSelector(state =>  state.weatherData);
   /* TOOGLE**/
   const [selectedBtn, setSelectedBtn] = React.useState('wo-origins');
 
@@ -135,45 +66,6 @@ const Weather = () =>
       store.dispatch(retrieveWeatherData(dataChange));
       setSelectedBtn(dataChange);
   };
-  var timeFormat = 'YYYY-MM-DDTHH:mm:ssZ';
-  const classes = useStyles();
-
-  /** GRAPHS */
-  var popData = {
-    datasets: [{
-      label: ['JFK temperatures in °C'],
-      data: weatherData.JFK,
-      backgroundColor: "#52FF9966",
-      borderColor: "#FF9966"
-    },
-    {
-      label: ['EWR temperatures in °C'],
-      data: weatherData.EWR,
-      backgroundColor: "#520083c9",
-      borderColor: "#0083c9"
-    },
-    {
-      label: ['LBA temperatures in °C'],
-      data: weatherData.LGA,
-      backgroundColor: "#5200c928",
-      borderColor: "#00c928"
-    },]
-  };
-  /*let w = watch(store.getState, 'weatherData')
-  store.subscribe(w((newVal, oldVal, objectPath) => {
-    console.log("data new arrived");
-  destData(newVal);
-  // admin.name changed from JP to JOE
-  }))
-
-  const destData = (newVal) => {
-
-  //var tempObj = JSON.parse(newVal);
-  console.log(newVal.JFK);
-  /**NEEDS TO BE JSON 
-  setbubbleData(newVal.JFK);
-}*/
-
   
     return (
 
