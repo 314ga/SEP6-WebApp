@@ -1,14 +1,14 @@
 import React from "react";
-import AppNavbar from '../components/AppNavbar'
+import AppNavbar from '../components/AppNavbar';
 import Paper from '@material-ui/core/Paper';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import store from '../store';
-import { retrieveWeatherData } from '../reducers/weatherData';
-import BubbleChartTemps from './charts/BubbleChartTemps'
+import BubbleChartAvgTemp from './charts/BubbleChartAvgTemp';
+import BubbleChartTemps from './charts/BubbleChartTemps';
+import BubbleChartDewTemps from './charts/BubbleChartDewTemps';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TableObservationsPerOrigin from "./tables/TableObservationsPerOrigin";
-
+import {retrieveData} from '../utils/StoreHandler';
   const StyledToggleButtonGroup = withStyles((theme) => ({
     grouped: {
       margin: theme.spacing(0.5),
@@ -23,9 +23,13 @@ import TableObservationsPerOrigin from "./tables/TableObservationsPerOrigin";
       },
     },
   }))(ToggleButtonGroup);
-
+retrieveData('weather','temp-attributes');
+retrieveData('weather','wo-origins');
+retrieveData('weather','dewp-attributes');
+retrieveData('weather','avgtemp-origin');
 const Weather = () => 
 {
+ 
   const useStyles = makeStyles((theme) => ({
     paper: {
       display: 'flex',
@@ -43,15 +47,12 @@ const Weather = () =>
     switch(param) {
       case 'wo-origins':
         return <TableObservationsPerOrigin/>
-
       case 'temp-attributes':
         return <BubbleChartTemps/>
-      case 'temp-jfk':
-        return 'temp-jfk';
-      case 'avgtemp-jfk':
-        return 'avgtemp-jfk';
+      case 'dewp-attributes':
+        return <BubbleChartDewTemps/>
       case 'avgtemp-origin':
-        return 'avgtemp-origin';
+        return <BubbleChartAvgTemp/>
       default:
         return <TableObservationsPerOrigin/>
     }
@@ -62,8 +63,6 @@ const Weather = () =>
 
   const handleDataChange = (event, dataChange) => 
   {
-      console.log("btn");
-      store.dispatch(retrieveWeatherData(dataChange));
       setSelectedBtn(dataChange);
   };
   
@@ -86,7 +85,10 @@ const Weather = () =>
           <ToggleButton value="temp-attributes" aria-label="centered">
             Temperatures
           </ToggleButton>
-          <ToggleButton value="avgtemp-jfk" aria-label="justified">
+          <ToggleButton value="dewp-attributes" aria-label="centered">
+            Dewpoint temperatures
+          </ToggleButton>
+          <ToggleButton value="avgtemp-origin" aria-label="justified">
             Mean temperatures
           </ToggleButton>
         </StyledToggleButtonGroup>

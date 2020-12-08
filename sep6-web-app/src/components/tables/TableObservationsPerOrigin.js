@@ -26,7 +26,7 @@ const TableObservationsPerOrigin = () =>
 const options = {
     filterType: 'checkbox',
 };
-  const weatherData = useSelector(state =>  state.weatherData);
+  const weatherData = useSelector(state =>  state.observData);
   
     return (
         <MUIDataTable

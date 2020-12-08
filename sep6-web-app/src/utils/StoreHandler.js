@@ -6,8 +6,19 @@ import { retrieveManufacturerData } from '../reducers/manufacturerData'
 
 
 //function to dipatch weather forecast & weather history, function called by eventListeners for exammple
-export const retrieveAllData = (type) => {
-    store.dispatch(retrieveFlightData("flight/" + type));
-    store.dispatch(retrieveWeatherData("weather/" + type));
-    store.dispatch(retrieveManufacturerData("flight/" + type));
+export const retrieveData = (storeType,type) => {
+    switch(storeType)
+    {
+        case 'weather':
+            store.dispatch(retrieveWeatherData(type));
+            break;
+        case 'manufacturer':
+           // store.dispatch(retrieveManufacturerData(type));
+            break;
+        case 'flights':
+            //store.dispatch(retrieveFlightData(type));
+            break;
+        default:
+            break;
+    }
 }
