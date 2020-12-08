@@ -36,10 +36,29 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   }))(ToggleButtonGroup);
-
+  const weatherObsCol = [
+    {
+      name: "origin",
+      label: "Origin",
+      options: {
+      filter: true,
+      sort: true,
+      }
+    },
+    {
+      name: "weather_obs_origin",
+      label: "Observations for origin",
+      options: {
+      filter: true,
+      sort: false,
+      }
+    },
+];
+const options = {
+  filterType: 'checkbox',
+};
 const Weather = () => 
 {
-  const [bubbleDataJFK, setbubbleData] = React.useState([]);
   const renderSwitch = param => 
   {
     switch(param) {
@@ -84,32 +103,27 @@ const Weather = () =>
         return <MUIDataTable
         title={"Weather observation for origins"}
         data={weatherData}
-        columns={weatherObsCol}
+        columns={{
+          name: "origin",
+          label: "Origin",
+          options: {
+          filter: true,
+          sort: true,
+          }
+        },
+        {
+          name: "weather_obs_origin",
+          label: "Observations for origin",
+          options: {
+          filter: true,
+          sort: false,
+          }
+        }}
         options={options}
         />;
     }
   };
-  const weatherObsCol = [
-      {
-        name: "origin",
-        label: "Origin",
-        options: {
-        filter: true,
-        sort: true,
-        }
-      },
-      {
-        name: "weather_obs_origin",
-        label: "Observations for origin",
-        options: {
-        filter: true,
-        sort: false,
-        }
-      },
-  ];
-  const options = {
-    filterType: 'checkbox',
-  };
+  
   //weatherData.map(weatherData => <div>{weatherData.key}</div>)
   const weatherData = useSelector(state =>  state.weatherData);
   /* TOOGLE**/
@@ -127,19 +141,19 @@ const Weather = () =>
   /** GRAPHS */
   var popData = {
     datasets: [{
-      label: ['JFK temperatures'],
+      label: ['JFK temperatures in °C'],
       data: weatherData.JFK,
       backgroundColor: "#52FF9966",
       borderColor: "#FF9966"
     },
     {
-      label: ['EWR temperatures'],
+      label: ['EWR temperatures in °C'],
       data: weatherData.EWR,
       backgroundColor: "#520083c9",
       borderColor: "#0083c9"
     },
     {
-      label: ['LBA temperatures'],
+      label: ['LBA temperatures in °C'],
       data: weatherData.LGA,
       backgroundColor: "#5200c928",
       borderColor: "#00c928"
