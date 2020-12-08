@@ -8,7 +8,7 @@ const FlightsPerMonthFrequency = () => {
     const flightsPerMonth = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [{
-            label: 'My First dataset',
+
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: flightData.flights,
