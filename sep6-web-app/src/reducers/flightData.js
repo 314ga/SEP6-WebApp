@@ -35,6 +35,7 @@ export function retrieveFlightData(type) {
         if (data != undefined) {
             switch (type) {
                 case "top-dest":
+                    console.log(data);
                     dispatch(setDestinationData(data));
                     break;
                 case "top-dest-table":
@@ -56,7 +57,7 @@ export function retrieveFlightData(type) {
                     dispatch(setAvgAirtime(data));
                     break;
 
-                case "arival-delay":
+                case "delays":
                     dispatch(setArrivalDelay(data));
                     break;
                 default:

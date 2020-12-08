@@ -12,6 +12,7 @@ import FlightsPerMonthSplit from './charts/FlightsPerMonthSplit'
 //table component import
 import TopDestinationsTable from "./tables/TopDestinationsTable";
 import AvgAirtime from "./tables/AvgAirtime";
+import Delays from "./tables/Delays";
 
 
 import AppNavbar from '../components/AppNavbar'
@@ -27,10 +28,10 @@ import Box from '@material-ui/core/Box';
 import { retrieveData } from '../utils/StoreHandler';
 // retrieveData('flights', 'top-dest');
 // retrieveData('flights', 'top-dest-table');
-// retrieveData('flights', "avg-airtime");
+retrieveData('flights', "avg-airtime");
 retrieveData('flights', "flights-per-month");
 retrieveData('flights', "flights-per-month-stacked");
-// retrieveData('flights', "arival-delay");
+retrieveData('flights', "delays");
 
 //material UI tabs panel functions
 function TabPanel(props) {
@@ -106,7 +107,7 @@ const FlightsPage = () => {
                         <Tab label="Top 10 destinations" />
                         <Tab label="Flights Per Month" />
                         <Tab label="Average airtime" />
-                        <Tab label="Arrival delay" />
+                        <Tab label="Delays" />
                     </Tabs>
                 </AppBar>
                 {/* TOP 10 DESTINATIONS */}
@@ -136,8 +137,8 @@ const FlightsPage = () => {
                     <AvgAirtime />
                 </TabPanel>
                 <TabPanel value={tabValue} index={3}>
-                    delay
-            </TabPanel>
+                    <Delays />
+                </TabPanel>
             </div>
         </div>
     );

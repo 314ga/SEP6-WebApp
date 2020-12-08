@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 
 
 
-const AvgAirtime = () => {
-    const avgAirtimeObsCol = [
+const Delays = () => {
+    const delaysObsCol = [
         {
             name: "origin",
             label: "Origin",
@@ -16,8 +16,16 @@ const AvgAirtime = () => {
             }
         },
         {
-            name: "average_air_time",
-            label: "Airtime",
+            name: "avgerage_ari_delay",
+            label: "Average Arrival Delay",
+            options: {
+                filter: true,
+                sort: false,
+            }
+        },
+        {
+            name: "average_dep_delay",
+            label: "Average Depature Delay",
             options: {
                 filter: true,
                 sort: false,
@@ -27,20 +35,20 @@ const AvgAirtime = () => {
     const options = {
         filterType: 'checkbox',
     };
-    const avgAirtimeData = useSelector(state => state.avgAirtimeData);
+    const delayData = useSelector(state => state.arrivalDelayData);
 
 
     return (
         <div>
-            <h2>Average Airtime</h2>
+            <h2>Top 10 Destinations Table</h2>
             <MUIDataTable
-                title={"Average Airtime"}
-                data={avgAirtimeData}
-                columns={avgAirtimeObsCol}
+                title={"Average Delays"}
+                data={delayData}
+                columns={delaysObsCol}
                 options={options}
             />
         </div>
     );
 };
 
-export default AvgAirtime;
+export default Delays;

@@ -7,8 +7,7 @@ import topDestReducer from './topDestReducer';
 import topDestTableReducer from './topDestTableReducer';
 import flightsPerMonthReducer from './flightsPerMonthReducer';
 import flightsPMStackedReducer from './flightsPMStackedReducer';
-// import flightsPMPercentReducer from './flightsPMPercentReducer';
-// import flightsPMSplitReducer from './flightsPMSplitReducer';
+
 import avgAirtimeReducer from './avgAirtimeReducer';
 import arrivalDelayReducer from './arrivalDelayReducer';
 //manufacturer data reducers
@@ -30,8 +29,6 @@ const allReducers = combineReducers({
     tempAvgData: tempAvgReducer,
     topDestData: topDestReducer,
     topDestTableData: topDestTableReducer,
-    // flightsPercentData: flightsPMPercentReducer,
-    // flightsSplitData: flightsPMSplitReducer,
     flightsStackedData: flightsPMStackedReducer,
     flightsPerMonthData: flightsPerMonthReducer,
     avgAirtimeData: avgAirtimeReducer,
