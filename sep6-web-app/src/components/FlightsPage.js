@@ -34,6 +34,7 @@ import { retrieveData } from '../utils/StoreHandler';
 // retrieveData('flights', "delays");
 
 //material UI tabs panel functions
+//Handles what view to render when a tab is clicked on
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 

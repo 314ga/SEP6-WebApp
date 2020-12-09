@@ -16,7 +16,7 @@ const FlightsPerManufacturer = () => {
             }
         },
         {
-            name: "flight_count",
+            name: "flights",
             label: "Number Of Flights",
             options: {
                 filter: true,

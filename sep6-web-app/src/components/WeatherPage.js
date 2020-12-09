@@ -1,35 +1,55 @@
 import React from "react";
 import AppNavbar from '../components/AppNavbar';
-import Paper from '@material-ui/core/Paper';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import BubbleChartAvgTemp from './charts/BubbleChartAvgTemp';
 import BubbleChartTemps from './charts/BubbleChartTemps';
 import BubbleChartDewTemps from './charts/BubbleChartDewTemps';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import TableObservationsPerOrigin from "./tables/TableObservationsPerOrigin";
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
 import { retrieveData } from '../utils/StoreHandler';
-const StyledToggleButtonGroup = withStyles((theme) => ({
-  grouped: {
-    margin: theme.spacing(0.5),
-    border: 'none',
-    background: 'linear-gradient(240deg, #abe9cd 0%, #3eadcf 74%)',
-    boxShadow: '0 3px 5px 2px #BDD4E7',
-    '&:not(:first-child)': {
-      borderRadius: theme.shape.borderRadius,
-    },
-    '&:first-child': {
-      borderRadius: theme.shape.borderRadius,
-    },
-  },
-}))(ToggleButtonGroup);
-// retrieveData('weather', 'temp-attributes');
+//Handles what view to render when a tab is clicked on
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+}
 // retrieveData('weather', 'wo-origins');
+// retrieveData('weather', 'temp-attributes');
 // retrieveData('weather', 'dewp-attributes');
 // retrieveData('weather', 'avgtemp-origin');
 const Weather = () => {
 
   const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      width: '100%',
+      backgroundColor: theme.palette.background.paper,
+    },
     paper: {
       display: 'flex',
       textAlign: 'center',
@@ -41,57 +61,58 @@ const Weather = () => {
     },
   }));
   const classes = useStyles();
-  const renderSwitch = param => {
-    switch (param) {
-      case 'wo-origins':
-        return <TableObservationsPerOrigin />
-      case 'temp-attributes':
-        return <BubbleChartTemps />
-      case 'dewp-attributes':
-        return <BubbleChartDewTemps />
-      case 'avgtemp-origin':
-        return <BubbleChartAvgTemp />
-      default:
-        return <TableObservationsPerOrigin />
-    }
+  const [tabValue, setTabValue] = React.useState(0);
+  const handleTabChange = (event, newValue) => {
+
+    setTabValue(newValue);
   };
-
-  /* TOOGLE**/
-  const [selectedBtn, setSelectedBtn] = React.useState('wo-origins');
-
-  const handleDataChange = (event, dataChange) => {
-    setSelectedBtn(dataChange);
-  };
-
   return (
 
     <div>
-      <AppNavbar />
+      <div>
+        <AppNavbar />
+      </div>
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
+
+          >
+            <Tab label="Weather Observations for origin" />
+            <Tab label="Temperatures" />
+            <Tab label="Dewpoint Temperatures" />
+            <Tab label="Mean temperatures" />
+          </Tabs>
+        </AppBar>
+        <TabPanel value={tabValue} index={0}>
+          <Box p={3}>
+            <TableObservationsPerOrigin />
+          </Box>
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          <Box p={3}>
+            <BubbleChartTemps />
+          </Box>
+        </TabPanel>
+        <TabPanel value={tabValue} index={2}>
+          <Box p={3}>
+            <BubbleChartDewTemps />
+          </Box>
+        </TabPanel>
+        <TabPanel value={tabValue} index={3}>
+          <Box p={3}>
+            <BubbleChartAvgTemp />
+          </Box>
+        </TabPanel>
+      </div>
 
 
-      <Paper elevation={0} className={classes.paper}>
-        <StyledToggleButtonGroup
-          size="small"
-          exclusive
-          onChange={handleDataChange}
-          aria-label="text alignment"
-        >
-          <ToggleButton value="wo-origins" aria-label="left aligned" selected>
-            Weather observation for origin
-          </ToggleButton>
-          <ToggleButton value="temp-attributes" aria-label="centered">
-            Temperatures
-          </ToggleButton>
-          <ToggleButton value="dewp-attributes" aria-label="centered">
-            Dewpoint temperatures
-          </ToggleButton>
-          <ToggleButton value="avgtemp-origin" aria-label="justified">
-            Mean temperatures
-          </ToggleButton>
-        </StyledToggleButtonGroup>
-      </Paper>
-
-      {renderSwitch(selectedBtn)}
     </div>
   );
 };

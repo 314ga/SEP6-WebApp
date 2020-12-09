@@ -13,7 +13,7 @@ import { api } from '../utils/RestAPI'
  */
 export function retrieveManufacturerData(type) {
     return async function fetchManufacturerData(dispatch, getState) {
-        const data = await api.get("flights?requestBody=" + type)
+        const data = await api.get("manufacturer?requestBody=" + type)
             .then(({ data }) => data)
             .catch((err) => {
                 if (err.response) {
@@ -33,6 +33,7 @@ export function retrieveManufacturerData(type) {
             });
 
         if (data != undefined) {
+
             switch (type) {
                 case "flights-per-manufacturer":
                     dispatch(setFlightsPerManufact(data));
@@ -42,6 +43,7 @@ export function retrieveManufacturerData(type) {
                     break;
 
                 case "airbus-per-manufaturer":
+                    console.log(data);
                     dispatch(setairbusPerManufact(data));
                     break;
                 default: console.log("case NOT FOUND");
